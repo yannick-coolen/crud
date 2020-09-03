@@ -84,7 +84,7 @@ if (!empty($_POST['telefoonnummer'])) {
 
 // Add extra email 
 if (!empty($_POST['email'])) {
-    $lid_id     = get_post($con, 'id');
+    $lid_id  = get_post($con, 'id');
     $email   = get_post($con, 'email');
     if(!preg_match("/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/",$email)) {   // Checks if 'email' is invalid
         $error_message = "Emailadres is ongeldig";                          // Sends back message when 'email' is invalid 
@@ -175,7 +175,6 @@ foreach ($rows as $row) {
                     <option value="<?php echo $rowpostcode['postcode']; ?>"><?php echo $rowpostcode['postcode'] . ', ' . $rowpostcode['adres'] . ', ' . $rowpostcode['woonplaats'];?></option>
                 <?php } ?>
 
-                <!-- <input type="text" class="form-control"  value="<?php echo $row['postcode'] . ', ' . $row['adres'] . ', ' . $row['woonplaats'];?>"> -->
                 </select> 
                 </div>
                 <!-- huisnummer -->
@@ -219,10 +218,17 @@ foreach ($rows as $row) {
                 <!-- Textfield -->
                 <div class="col">
                     <div class="sub-container pl-3 pt-2">
-                        <?php  foreach ($rows2 as $row_tel) {?>
-                            <?php echo "<ul><li>".$row_tel["telefoonnummer"] . "<span class='ml-3'><a href='update-delete.php?tel=". $row_tel["telefoonnummer"] . "&lidid=" . $lid_id . "' class='close' aria-label='Close'>X</a></span>"."</li></ul>"; 
-                            ?>
-                        <?php } ?>
+                        <?php 
+                            if (count($rows2) == 1) {
+                                echo "<ul><li>".$rows2[0]["telefoonnummer"]."</li></ul>";
+                            } else {
+                                foreach ($rows2 as $row_tel) { ?>
+                                <?php echo "<ul><li>".$row_tel["telefoonnummer"] . "<span class='ml-3'><a href='update-delete.php?tel=". $row_tel["telefoonnummer"] . "&lidid=" . $lid_id . "' class='close' aria-label='Close'>X</a></span>"."</li></ul>"; 
+                                ?>
+                                <?php 
+                                }
+                            } 
+                        ?>
                     </div>
                 </div>
             </div>
@@ -249,9 +255,15 @@ foreach ($rows as $row) {
                 <!-- Textfield -->
                 <div class="col">
                     <div class="sub-container pl-3 pt-2">
-                        <?php foreach ($rows3 as $row_email) {?>
-                            <?php echo "<ul><li>". $row_email["email"] . "<span class='ml-3'><a href='update-delete.php?email=". $row_email["email"] . "&lidid=" . $lid_id . "' class='close' aria-label='Close'>X</a></span>"."</li></ul>";?>
-                        <?php } ?>
+                    <?php if (count($rows3) == 1) {
+                                echo "<ul><li>".$rows3[0]["email"]."</li></ul>";
+                            } else {
+                                foreach ($rows3 as $row_email) { ?>
+                                <?php echo "<ul><li>". $row_email["email"] . "<span class='ml-3'><a href='update-delete.php?email=". $row_email["email"] . "&lidid=" . $lid_id . "' class='close' aria-label='Close'>X</a></span>"."</li></ul>";?>
+                                <?php
+                            } 
+                        } 
+                    ?>
                     </div>
                 </div>
             </div>
