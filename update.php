@@ -32,7 +32,7 @@ if (isset($_POST["action"])) {
         }
         // Modify lid
         if($good) {
-        $query = "UPDATE `lid` SET `naam` = '$naam', `achternaam` = '$achternaam', `huisnummer` = '$huisnummer' WHERE `lid`.`id` = '$lid_id'"; 
+        $query = "UPDATE `lid` SET `naam` = '$naam', `achternaam` = '$achternaam', `huisnummer` = '$huisnummer', `postcode` = '$postcode' WHERE `lid`.`id` = '$lid_id'"; 
 
         $result         = $con->query($query);
         $lid_id         = $con->insert_id;   
@@ -146,6 +146,11 @@ foreach ($rows as $row) {
         <form action="update.php" method="POST" style="padding: 1em;">
         <input type="hidden" name="action" value="update">
         <input type="hidden" name="id" value="<?php echo $row['id'];?>">
+        <?php
+            $query_postcode = "SELECT * FROM postcode"; 
+            $result_postcode = $con->query($query_postcode);
+            $postcode_rows = $result_postcode->fetch_all(MYSQLI_ASSOC);
+        ?>
         <!-- Start 1st inputfields -->
             <div class="row">
                 <!-- Naam -->
@@ -166,8 +171,10 @@ foreach ($rows as $row) {
                 <!-- Naam -->
                 <div class="col">
                 <p>Wijzig adres:</p> 
-                <select class="form-control" name="" id="">
-                    <option value=""><?php echo $row['postcode'] . ', ' . $row['adres'] . ', ' . $row['woonplaats'];?></option>
+                <select class="form-control" name="postcode"><?php foreach($postcode_rows as $rowpostcode) { ?>
+                    <option value="<?php echo $rowpostcode['postcode']; ?>"><?php echo $rowpostcode['postcode'] . ', ' . $rowpostcode['adres'] . ', ' . $rowpostcode['woonplaats'];?></option>
+                <?php } ?>
+
                 <!-- <input type="text" class="form-control"  value="<?php echo $row['postcode'] . ', ' . $row['adres'] . ', ' . $row['woonplaats'];?>"> -->
                 </select> 
                 </div>
@@ -212,8 +219,8 @@ foreach ($rows as $row) {
                 <!-- Textfield -->
                 <div class="col">
                     <div class="sub-container pl-3 pt-2">
-                        <?php  foreach ($rows2 as $row) {?>
-                            <?php echo "<ul><li>".$row["telefoonnummer"] . "<span class='ml-3'><a href='' class='close' aria-label='Close'>X</a></span>"."</li></ul>"; 
+                        <?php  foreach ($rows2 as $row_tel) {?>
+                            <?php echo "<ul><li>".$row_tel["telefoonnummer"] . "<span class='ml-3'><a href='update-delete.php?tel=". $row_tel["telefoonnummer"] . "&lidid=" . $lid_id . "' class='close' aria-label='Close'>X</a></span>"."</li></ul>"; 
                             ?>
                         <?php } ?>
                     </div>
@@ -233,7 +240,7 @@ foreach ($rows as $row) {
         ?>
             <!-- Start 5th inputfields-->
             <div class="row">
-                <!-- Adres -->
+                <!-- Emailadres -->
                 <div class="col">
                     <p>Emailadres:</p>  
                     <input type="text" class="form-control" placeholder="Voer uw emailadres in" name="email"> <br>
@@ -242,8 +249,8 @@ foreach ($rows as $row) {
                 <!-- Textfield -->
                 <div class="col">
                     <div class="sub-container pl-3 pt-2">
-                        <?php foreach ($rows3 as $row) {?>
-                            <?php echo "<ul><li>". $row["email"] . "<span class='ml-3'><a href='' class='close' aria-label='Close'>X</a></span>"."</li></ul>";?>
+                        <?php foreach ($rows3 as $row_email) {?>
+                            <?php echo "<ul><li>". $row_email["email"] . "<span class='ml-3'><a href='update-delete.php?email=". $row_email["email"] . "&lidid=" . $lid_id . "' class='close' aria-label='Close'>X</a></span>"."</li></ul>";?>
                         <?php } ?>
                     </div>
                 </div>
