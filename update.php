@@ -1,17 +1,17 @@
-<?php
+<?php   // update.php
 require_once dirname(__FILE__) . '/includes/config.php';
 require_once dirname(__FILE__) . '/includes/queries.php'; 
 
+// Error
 $error_message = '';
 $error_postcode = $error_telefoonnummer = $error_email = '';
-
+// Valid
 $good = true;
 
-//stap 1: voeg postcode toe
+// Insert 'lid'
 if (isset($_POST["action"])) {
         $postcode = get_post($con, 'postcode');
         $lid_id = get_post($con, 'id');
-
     if (!empty($_POST['naam'])          &&
         !empty($_POST['achternaam'])    &&
         !empty($_POST['huisnummer']))    {
@@ -36,7 +36,6 @@ if (isset($_POST["action"])) {
 
         $result         = $con->query($query);
         $lid_id         = $con->insert_id;   
-
         // Sends back success message
         echo <<<_END
         <div class="bg-info text-white p-2">
@@ -53,7 +52,6 @@ if (isset($_POST["action"])) {
         }
     }   
 }
-
 // Add extra number
 if (!empty($_POST['telefoonnummer'])) {
     $lid_id     = get_post($con, 'id');
@@ -81,7 +79,6 @@ if (!empty($_POST['telefoonnummer'])) {
         _END; 
     }
 }
-
 // Add extra email 
 if (!empty($_POST['email'])) {
     $lid_id  = get_post($con, 'id');
@@ -168,26 +165,26 @@ foreach ($rows as $row) {
         <br>
             <!-- Start 2nd inputfields -->
             <div class="row">
-                <!-- Naam -->
+                <!-- Change adres -->
                 <div class="col">
                 <p>Wijzig adres:</p> 
                 <select class="form-control" name="postcode"><?php foreach($postcode_rows as $rowpostcode) { ?>
                     <option value="<?php echo $rowpostcode['postcode']; ?>"><?php echo $rowpostcode['postcode'] . ', ' . $rowpostcode['adres'] . ', ' . $rowpostcode['woonplaats'];?></option>
                 <?php } ?>
-
                 </select> 
                 </div>
-                <!-- huisnummer -->
+                <!-- current 'postcode'and 'huisnummer' -->
                 <div class="col">
                     <div class="row">
-                    <!-- Telefoonnummer -->
                         <div class="col">
+                        <!-- Current adres -->
                         <p>Huidige adres:</p>  
-                        <input type="text" class="form-control bg-white" placeholder="Voer uw achternaam in" name="huisnummer" value="<?php echo $row['postcode'] . ', ' . $row['adres'] . ', '. $row['woonplaats'] ;?>" disabled>
+                        <input type="text" class="form-control bg-white" value="<?php echo $row['postcode'] . ', ' . $row['adres'] . ', '. $row['woonplaats'] ;?>" disabled>
                         </div>
                         <div class="col-sm-4">
+                        <!-- Huisnummer -->
                         <p>Huisnummer:</p>  
-                        <input type="text" class="form-control" placeholder="Voer uw achternaam in" name="huisnummer" value="<?php echo $row['huisnummer'];?>">
+                        <input type="text" class="form-control" placeholder="Voer uw huisnummer in" name="huisnummer" value="<?php echo $row['huisnummer'];?>">
                         </div>
                     </div>
                 </div>
@@ -199,15 +196,14 @@ foreach ($rows as $row) {
         <form action="update.php" method="POST" style="padding: 1em;">
         <input type="hidden" name="id" value="<?php echo $lid_id;?>">
         <?php
-        //Nieuwe query
-        //Selecteer alle telefoonnummers van het lid $lid_id
+        //New query
+        //Select all 'telefoonnummers' from lid $lid_id
         $query2 = "SELECT telefoonnummer FROM telefoonnummer WHERE lid_id ='$lid_id'"; 
         $result2 = $con->query($query2);
         $rows2 = $result2->fetch_all(MYSQLI_ASSOC);
         ?>
-            <!-- End 3rd inputfields -->
             <br>
-            <!-- Start 4th inputfields-->
+            <!-- Start 3th inputfields-->
             <div class="row">
                 <!-- Telefoonnummer -->
                 <div class="col">
@@ -232,19 +228,19 @@ foreach ($rows as $row) {
                     </div>
                 </div>
             </div>
-            <!-- End 4th inputfields -->
+            <!-- End 3th inputfields -->
         </form>
-        <!-- Add Phonenumber -->
+        <!-- Add Email -->
         <form action="update.php" method="POST" style="padding: 1em;">
         <input type="hidden" name="id" value="<?php echo $lid_id;?>">
         <?php
-        //Nieuwe query
-        //Selecteer alle telefoonnummers van het lid $lid_id
+        //New query
+        //Select all 'email' from lid $lid_id
         $query3 = "SELECT email FROM email WHERE lid_id ='$lid_id'"; 
         $result3 = $con->query($query3);
         $rows3 = $result3->fetch_all(MYSQLI_ASSOC);
         ?>
-            <!-- Start 5th inputfields-->
+            <!-- Start 4th inputfields-->
             <div class="row">
                 <!-- Emailadres -->
                 <div class="col">
@@ -267,7 +263,7 @@ foreach ($rows as $row) {
                     </div>
                 </div>
             </div>
-            <!-- End 5th inputfields -->
+            <!-- End 4th inputfields -->
             <br>
         </form>
     </div>

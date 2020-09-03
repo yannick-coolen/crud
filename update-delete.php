@@ -1,14 +1,15 @@
-<?php   // delete.php
+<?php   // update-delete.php
 require_once dirname(__FILE__) . "/includes/config.php";
 
+// Valid
 $good = true;
-
+// Remove 'telefoonnummer' from textfield in update.php 
 if (isset($_GET['lidid']) && 
     isset($_GET['tel']) 
 )  {
     // Prepare message
     $log = [];
-
+    // Get variables
     $lidid = $_GET['lidid'];
     $tel = $_GET['tel'];
 
@@ -21,16 +22,15 @@ if (isset($_GET['lidid']) &&
     } else {    // result successfully handled of telefoonnummer
         $log[] =  "Telefoonnummer successfully deleted.";
     }
-
+    // Go back to update.php
     header("location: update.php?id=$lidid");
 }
-
+// Remove 'email' from textfield in update.php 
 if (isset($_GET['lidid']) && 
-    isset($_GET['email']) 
-)  {
+    isset($_GET['email']))  {
     // Prepare message
     $log = [];
-
+    // Get variables
     $lidid = $_GET['lidid'];
     $tel = $_GET['email'];
 
@@ -49,7 +49,7 @@ if (isset($_GET['lidid']) &&
     } else {    // result successfully handled of telefoonnummer
         $log[] =  "Telefoonnummer successfully deleted.";
     }
+    // Go back to update.php
     header("location: update.php?id=$lidid");
-}
-// Go back to ledenlijst.php
+    }
 ?>
