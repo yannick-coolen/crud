@@ -7,8 +7,8 @@
         kan gebruik gemaakt worden van de code uit de voorgaande inzendopdracht.
 
 	Create 	[done]
-	Read	[partly done]
-	Update  
+	Read	[done]
+	Update  [done]
 	Delete	[done]
 
     -----------------------------------------------------------
