@@ -231,7 +231,7 @@ foreach ($rows as $row) {
                 <div class="col">
                     <div class="sub-container pl-3 pt-2">
                         <?php  foreach ($rows2 as $row) {?>
-                            <?php echo "<ul><li>".$row["telefoonnummer"] . "</li></ul>"; 
+                            <?php echo "<ul><li>".$row["telefoonnummer"] . "<span class='ml-3'><a href='' class='close' aria-label='Close'>X</a></span>"."</li></ul>"; 
                             ?>
                         <?php } ?>
                     </div>
@@ -261,7 +261,7 @@ foreach ($rows as $row) {
                 <div class="col">
                     <div class="sub-container pl-3 pt-2">
                         <?php foreach ($rows3 as $row) {?>
-                            <?php echo "<ul><li>". $row["email"] . "</li></ul>";?>
+                            <?php echo "<ul><li>". $row["email"] . "<span class='ml-3'><a href='' class='close' aria-label='Close'>X</a></span>"."</li></ul>";?>
                         <?php } ?>
                     </div>
                 </div>
