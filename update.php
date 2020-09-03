@@ -12,24 +12,6 @@ if (isset($_POST["action"])) {
         $postcode = get_post($con, 'postcode');
         $lid_id = get_post($con, 'id');
 
-        // Is the postcode valid?
-
-        // Is the number valid?
-        
-        //check if all postcode is already inserted in the database
-        // $query  = "SELECT postcode FROM postcode where Postcode = '$postcode' ";
-        // $result = $con->query($query);
-        // $rows   = $result->num_rows;
-        // if ($rows>0) {
-        //     echo "Deze postcode is al ingevoerd in de database";
-        // } else {
-        //     $adres      = get_post($con, 'adres');
-        //     $woonplaats = get_post($con, 'woonplaats');
-        //     $query      = "INSERT INTO postcode VALUES ('$postcode', '$adres', '$woonplaats')";
-
-        //     $result     = $con->query($query);
-        //     if (!$result) echo "insert failed"; 
-        // }
     if (!empty($_POST['naam'])          &&
         !empty($_POST['achternaam'])    &&
         !empty($_POST['huisnummer']))    {
@@ -185,7 +167,7 @@ foreach ($rows as $row) {
                 <div class="col">
                 <p>Wijzig adres:</p> 
                 <select class="form-control" name="" id="">
-                    <option value=""><?php echo $row['postcode'] . ', ' . $row['adres'] . ', ' . $row['woonplaats'];;?></option>
+                    <option value=""><?php echo $row['postcode'] . ', ' . $row['adres'] . ', ' . $row['woonplaats'];?></option>
                 <!-- <input type="text" class="form-control"  value="<?php echo $row['postcode'] . ', ' . $row['adres'] . ', ' . $row['woonplaats'];?>"> -->
                 </select> 
                 </div>
@@ -195,7 +177,7 @@ foreach ($rows as $row) {
                     <!-- Telefoonnummer -->
                         <div class="col">
                         <p>Huidige adres:</p>  
-                        <input type="text" class="form-control" placeholder="Voer uw achternaam in" name="huisnummer" value="<?php echo $row['postcode'] . ', ' . $row['adres'] . ', '. $row['woonplaats'] ;?>">
+                        <input type="text" class="form-control bg-white" placeholder="Voer uw achternaam in" name="huisnummer" value="<?php echo $row['postcode'] . ', ' . $row['adres'] . ', '. $row['woonplaats'] ;?>" disabled>
                         </div>
                         <div class="col-sm-4">
                         <p>Huisnummer:</p>  
