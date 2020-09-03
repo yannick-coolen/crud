@@ -1,0 +1,22 @@
+
+    1.  Maak de database aan met behulp van een SQL-bestand, voeg van drie personen voorbeelddata in.
+
+    2.  Maak een PHP-pagina leden.php waar leden kunnen worden toegevoegd, bewerkt en verwijderd, 
+        waarbij leden meerdere telefoonnummers en e-mailadressen kunnen hebben. 
+        Dus volledig CRUD met gebruik van een formulier. Voor het beheer van de postcode gegevens 
+        kan gebruik gemaakt worden van de code uit de voorgaande inzendopdracht.
+
+	Create 	[done]
+	Read	[partly done]
+	Update  
+	Delete	[done]
+
+    -----------------------------------------------------------
+
+    to do
+
+    * Maak de validatie van de postcode table af
+
+    UPDATE pagina
+
+    * Zorg dat de postcode op basis van een selectbox de postcodes kan wijzingen
